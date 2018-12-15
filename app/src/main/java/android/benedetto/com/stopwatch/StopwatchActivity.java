@@ -27,17 +27,21 @@ public class StopwatchActivity extends Activity {
         runTimer();
     }
 
+    // replacing the onStart with onResume so that the same code covers both the case of
+    // a resume AND a start
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         if (wasRunning) {
             running = true;
         }
     }
 
+    // same as above: onPause is called irrespective of whether the activity is paused or stopped
+    // so we can use the same code - remove onStop and replace it with an onPaude
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         // stop the stopwatch
         wasRunning = running;
         running = false;
@@ -85,6 +89,9 @@ public class StopwatchActivity extends Activity {
             }
         });
     }
-
-
 }
+
+// a g d h f b d
+// a g d b e h a g d b e c g d
+// onCreate onStart onResume onPause onStop onDestroy onCreate onStart onResume onPause onStop
+// onRestart onStart onResume
